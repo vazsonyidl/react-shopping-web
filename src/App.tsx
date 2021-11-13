@@ -1,9 +1,17 @@
 import React from 'react';
+import {Routes, Route} from 'react-router-dom';
 import './App.css';
+import LoginPage from './pages/LoginPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
-    <div>App works!</div>
+    <>
+      <Routes>
+        <Route path='/' element={<LoginPage />} />
+        <Route path='/about' element={<AboutPage />} />
+      </Routes>
+    </>
   );
 }
 
