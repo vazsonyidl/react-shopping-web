@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-import {TextField, Box, Button} from '@mui/material';
+import {TextField, Box, Button, Alert} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 
 import {loginWithEmail} from '../firebase-api/auth';
+import './LoginPage.css';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
   const onUserNameChange = ({target: {value}}: React.ChangeEvent<HTMLInputElement>): void => {
@@ -18,12 +20,13 @@ const LoginPage = () => {
   };
 
   const onLoginClick = (): void => {
-    loginWithEmail(email, password).then((cred) => void navigate('/about'));
+    loginWithEmail(email, password).then(() => void navigate('/about')).catch(() => setError('Authentication failed! Try again.'));
   };
 
   return (
-    <section>
-      <Box component="form" sx={{display: 'flex', flexDirection: 'column'}}>
+    <section className="login-container">
+      <Box component="form" sx={{display: 'flex', flexDirection: 'column', rowGap: '8px'}}>
+        {error ? <Alert severity={'error'}>{error}</Alert> : null}
         <TextField label="E-mail" variant="outlined" size="small" autoComplete="username" value={email}
                    onChange={onUserNameChange}/>
         <TextField label="Password" type="password" variant="outlined" autoComplete="current-password" size="small"
