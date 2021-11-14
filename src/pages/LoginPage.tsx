@@ -20,7 +20,7 @@ const LoginPage = () => {
   };
 
   const onLoginClick = (): void => {
-    loginWithEmail(email, password).then(() => void navigate('/about')).catch(() => setError('Authentication failed! Try again.'));
+    loginWithEmail(email, password).then(() => void navigate('/home')).catch(() => setError('Authentication failed! Try again.'));
   };
 
   return (
