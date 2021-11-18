@@ -12,9 +12,7 @@ const HomePage = () => {
     fetchItems(collectionPath, documentPath)
       .then(snapshot => snapshot.data() || {})
       .then((data: {[key: string]: ShoppingListItemType}) => {
-        const f = Object.keys(data || {}).map((key) => ({...data[key], name: key}));
-        console.log(f);
-        setListItems(f);
+        setListItems(Object.keys(data || {}).map((key) => ({...data[key], name: key})));
       });
   }, []);
   return (
