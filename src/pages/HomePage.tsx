@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {fetchItems} from '../firebase-api/rest';
 import {ShoppingListItemType} from '../models/rest.interface';
+import ListItem from '../components/ListItem/ListItem';
 
 const collectionPath = 'elements';
 const documentPath = 'week_one';
@@ -17,7 +18,7 @@ const HomePage = () => {
   }, []);
   return (
     <>
-      {listItems.map((item, index) => <div key={index}>{item.name}</div>)}
+      {listItems.map((item, index) => <ListItem item={item} key={index}/>)}
     </>
   )
 }
